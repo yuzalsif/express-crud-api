@@ -24,6 +24,7 @@ const ProductSchema = new mongoose.Schema(
       required: false,
     },
   },
+  //TODO: Find why timestamp is not working
   {
     timeStamp: true,
   }
