@@ -42,3 +42,12 @@ app.get("/api/products", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+app.get("/api/products/:id", async (req, res) => {
+  try {
+    const product = await Products.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
