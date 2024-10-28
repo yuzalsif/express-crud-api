@@ -51,3 +51,14 @@ app.get("/api/product/:id", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+app.put("/api/product/:id", async (req, res) => {
+  try {
+    const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
