@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -18,3 +19,11 @@ mongoose
     );
   })
   .catch((err) => console.log("Connection to the database failed", err));
+
+app.post("/api/products", (req, res) => {
+  try {
+    res.send("Trying post methods");
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
