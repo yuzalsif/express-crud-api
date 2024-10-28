@@ -1,8 +1,12 @@
-const { response } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 
+const Products = require("./models/product.model.ts");
+
 const app = express();
+
+app.use(express.json());
+
 const port = process.env.PORT || 3000;
 app.get("/", (req, res) =>
   res.send("This is a response coming from the  Node API")
@@ -20,9 +24,11 @@ mongoose
   })
   .catch((err) => console.log("Connection to the database failed", err));
 
-app.post("/api/products", (req, res) => {
+app.post("/api/products", async (req, res) => {
   try {
-    res.send("Trying post methods");
+    const product = await new Products(req.body);
+    await product.save();
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
