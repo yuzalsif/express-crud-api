@@ -4,8 +4,9 @@ const mongoose = require("mongoose");
 const Products = require("./models/product.model.ts");
 
 const app = express();
-
 app.use(express.json());
+
+// routes
 
 const port = process.env.PORT || 3000;
 app.get("/", (req, res) =>
@@ -43,7 +44,7 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-app.get("/api/product/:id", async (req, res) => {
+app.get("/api/products/:id", async (req, res) => {
   try {
     const product = await Products.findById(req.params.id);
     res.status(200).json(product);
@@ -52,7 +53,7 @@ app.get("/api/product/:id", async (req, res) => {
   }
 });
 
-app.put("/api/product/:id", async (req, res) => {
+app.put("/api/products/:id", async (req, res) => {
   try {
     const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -66,7 +67,7 @@ app.put("/api/product/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/product/:id", async (req, res) => {
+app.delete("/api/products/:id", async (req, res) => {
   try {
     const product = await Products.findByIdAndDelete(req.params.id);
     if (!product) {
