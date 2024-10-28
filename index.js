@@ -43,7 +43,7 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-app.get("/api/products/:id", async (req, res) => {
+app.get("/api/product/:id", async (req, res) => {
   try {
     const product = await Products.findById(req.params.id);
     res.status(200).json(product);
